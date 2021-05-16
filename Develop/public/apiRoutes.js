@@ -1,1 +1,0 @@
-const inputData = require('../develop/db');
