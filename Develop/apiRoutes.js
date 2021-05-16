@@ -1,4 +1,4 @@
-/*const inputData = require('../db');
+const inputData = require('../db');
 const newTitle = require('../db');
 const newText = require('../db');
 const fs = require('fs');
@@ -16,4 +16,4 @@ module.exports = (app) => {
         const newText = req.body;
         noteText.push(req.body);
     });
-}*/
+}

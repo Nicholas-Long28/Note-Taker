@@ -23,9 +23,10 @@ app.use('/index', express);
 app.set('view engine', 'uuid')
 
 
-app.get('/', (req, res) => res.sendFile(path.join(__dirname, 'index.html')));
+app.get('/', (req, res) => res.sendFile(path.join(__dirname, '/index.html')));
 
-app.get('/notes', (req, res) => res.sendFile(path.join(__dirname, '/notes.html')));
+
+app.get('/notes', (req, res) => res.sendFile(path.join(__dirname, '/public/notes.html')));
 
 app.listen(PORT, function() {
     console.log('App listening on PORT:' + PORT);
@@ -38,7 +39,7 @@ app.route("/api/notes")
     })
 
     .post(function (req, res) {
-        let jsonFilePath = path.join(__dirname, "/db/db.json");
+        let jsonFilePath = path.join(__dirname, "/develop/db.json");
         let newNote = req.body;
 
         let highestId = 99;
@@ -64,7 +65,7 @@ app.route("/api/notes")
 
 
 app.delete("/api/notes/:id", function (req, res) {
-    let jsonFilePath = path.join(__dirname, "/db/db.json");
+    let jsonFilePath = path.join(__dirname, "/develop/db.json");
     for (let i = 0; i < database.length; i++) {
 
         if (database[i].id == req.params.id) {
