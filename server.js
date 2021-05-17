@@ -62,8 +62,8 @@ app.get('/api/notes', (req, res) => {
         if (err) {
             throw err;
         }
-        let database = JSON.parse(data);
-    res.json(database);
+        let saveNoteBtn = JSON.parse(data);
+    res.render({ title: text }); database;
     })
 });
 
