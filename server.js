@@ -24,10 +24,14 @@ app.use('/index', express);
 app.set('view engine', 'uuid')
 
 
-app.get('/', (req, res) => res.sendFile(path.join(__dirname, 'public/index.html')));
-app.get('/api/notes/'), (req, res) => res.sendFile(path.join(__dirname, 'public/assets/db.json'));
+app.get('/', (req, res) => res.sendFile(path.join(__dirname, '/index.html')));
+app.get('/api/notes/'), (req, res) => res.sendFile(path.join(__dirname, '/assets/db.json'));
 app.get('/*', (req, res) => res.sendFile(path.join(__dirname, 'public/index.html')));
-app.get('/notes', (req, res) => res.sendFile(path.join(__dirname, '/notes.html')));
+app.get('/notes', (req, res) => {
+    console.log(__dirname);
+    res.sendFile(path.join(__dirname, '../public/notes.html'))
+});
+
 
 app.listen(PORT, function() {
     console.log('App listening on PORT:' + PORT);
@@ -65,7 +69,7 @@ app.delete("/api/notes/:id", function (req, res) {
         }
     }
    
-    fs.writeFileSync(jsonFilePath, JSON.stringify(database), function (err) {
+    fs.writeFile(jsonFilePath, JSON.stringify(database), function (err) {
 
         if (err) {
             return console.log(err);
@@ -81,8 +85,8 @@ app.get('/api/notes', (req, res) => {
         if (err) {
             throw err;
         }
-    }
-    ,res.json({}));
+    })
+    res.json({});
 });
 
 
@@ -91,11 +95,6 @@ app.post('/api/notes', (req,res) => {
         if (err) {
             throw err;
         }
-    }
-    ,res.json({}));
+    })
+    res.json({});
 });
-
-app.listen(PORT, () => {
-    console.log(`App listening on PORT: ${PORT}`);
-  });
-  
