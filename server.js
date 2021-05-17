@@ -24,39 +24,54 @@ app.use('/index', express);
 app.set('view engine', 'uuid')
 
 
+app.get('/notes', (req, res) => {
+    console.log(__dirname);
+    res.sendFile(path.join(__dirname, 'public/notes.html'))
+});
 app.get('/', (req, res) => res.sendFile(path.join(__dirname, '/index.html')));
 app.get('/api/notes/'), (req, res) => res.sendFile(path.join(__dirname, '/assets/db.json'));
 app.get('/*', (req, res) => res.sendFile(path.join(__dirname, 'public/index.html')));
-app.get('/notes', (req, res) => {
-    console.log(__dirname);
-    res.sendFile(path.join(__dirname, '../public/notes.html'))
-});
 
+app.post("/api/notes", (req, res) => {
+    /*.get(function (req, res) {
+        res.json(database);
+    })*/
+
+        let jsonFilePath = path.join(__dirname, "/db/db.json");
+        console.log(req.body);
+        let newNote = req.body;
+        fs.readFile(jsonFilePath, function read(err, data){
+            if (err) {
+                throw err;
+            }
+            let database = JSON.parse(data);
+            database.push(newNote);
+            fs.writeFile(jsonFilePath, JSON.stringify(database), function (err) {
+    
+                if (err) {
+                    return console.log(err);
+                }
+                console.log("Your note was saved!");
+            }); 
+        })
+        res.json(newNote);
+}) 
+
+app.get('/api/notes', (req, res) => {
+    fs.readFile('public/assets/db.json', function read(err, data){
+        if (err) {
+            throw err;
+        }
+        let database = JSON.parse(data);
+    res.json(database);
+    })
+});
 
 app.listen(PORT, function() {
     console.log('App listening on PORT:' + PORT);
 });
 
 
-app.route("/api/notes")
-    .get(function (req, res) {
-        res.json(database);
-    })
-
-    .post(function (req, res) {
-        let jsonFilePath = path.join(__dirname, "/db/db.json");
-        let newNote = req.body;
-        database.push(newNote)
-
-        fs.writeFile(jsonFilePath, JSON.stringify(database), function (err) {
-
-            if (err) {
-                return console.log(err);
-            }
-            console.log("Your note was saved!");
-        }); 
-        res.json(newNote);
-    });
 
 
 app.delete("/api/notes/:id", function (req, res) {
@@ -78,15 +93,6 @@ app.delete("/api/notes/:id", function (req, res) {
         }
     });
     res.json(database);
-});
-
-app.get('/api/notes', (req, res) => {
-    fs.readFile('public/assets/db.json', function read(err, data){
-        if (err) {
-            throw err;
-        }
-    })
-    res.json({});
 });
 
 
