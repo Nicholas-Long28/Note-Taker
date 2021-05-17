@@ -1,7 +1,8 @@
 const express = require('express')
 const fs = require('fs');
 const path = require('path');
-const app = express();6
+const app = express();
+const uuidv1 = require('uuid');
 const PORT = process.env.PORT || 4000;
 /*var router = express.Router();
 
@@ -41,16 +42,6 @@ app.route("/api/notes")
     .post(function (req, res) {
         let jsonFilePath = path.join(__dirname, "/develop/db/db.json");
         let newNote = req.body;
-
-        let highestId = 99;
-        for (let i = 0; i < database.length; i++) {
-            let individualNote = database[i];
-
-            if (individualNote.id > highestId) {
-                highestId = individualNote.id;
-            }
-        } 
-        newNote.id = highestId + 1;
         database.push(newNote)
 
         fs.writeFile(jsonFilePath, JSON.stringify(database), function (err) {
