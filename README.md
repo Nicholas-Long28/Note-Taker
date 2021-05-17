@@ -20,6 +20,7 @@ To add a screenshot, create an `assets/images` folder in your repository and upl
     <img></img>
     ![Website Preview](./Assets/images/noteinput.png)
     ![Website Preview](./Assets/images/notetakerhome.png)
+    ![Website Preview](./Assets/images/finalizednotetaker.png)
     ```
 ## Credits
 https://developer.mozilla.org/en-US/
