@@ -62,8 +62,8 @@ app.get('/api/notes', (req, res) => {
         if (err) {
             throw err;
         }
-        let saveNoteBtn = JSON.parse(data);
-    res.render({ title: text }); database;
+        let newNote = JSON.parse(data);
+    res.json(data);
     })
 });
 
@@ -97,7 +97,7 @@ app.delete("/api/notes/:id", function (req, res) {
 
 
 app.post('/api/notes', (req,res) => {
-    fs.writeFile('public/assets/db.json', returnedObject, err => {
+    fs.writeFile('/db/db.json', returnedObject, err => {
         if (err) {
             throw err;
         }
