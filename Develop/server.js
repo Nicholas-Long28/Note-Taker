@@ -39,7 +39,7 @@ app.route("/api/notes")
     })
 
     .post(function (req, res) {
-        let jsonFilePath = path.join(__dirname, "/develop/db.json");
+        let jsonFilePath = path.join(__dirname, "/develop/db/db.json");
         let newNote = req.body;
 
         let highestId = 99;
@@ -65,7 +65,7 @@ app.route("/api/notes")
 
 
 app.delete("/api/notes/:id", function (req, res) {
-    let jsonFilePath = path.join(__dirname, "/develop/db.json");
+    let jsonFilePath = path.join(__dirname, "/develop/db/db.json");
     for (let i = 0; i < database.length; i++) {
 
         if (database[i].id == req.params.id) {
