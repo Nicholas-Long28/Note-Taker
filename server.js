@@ -17,7 +17,7 @@ router.get('/index.js', function (req, res) {
 module.exports = router;*/
 
 
-//app.use(express.static('public'));
+app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use('/index', express);
@@ -40,7 +40,7 @@ app.route("/api/notes")
     })
 
     .post(function (req, res) {
-        let jsonFilePath = path.join(__dirname, "/db.json");
+        let jsonFilePath = path.join(__dirname, "/db/db.json");
         let newNote = req.body;
         database.push(newNote)
 
@@ -56,7 +56,7 @@ app.route("/api/notes")
 
 
 app.delete("/api/notes/:id", function (req, res) {
-    let jsonFilePath = path.join(__dirname, "/db.json");
+    let jsonFilePath = path.join(__dirname, "/db/db.json");
     for (let i = 0; i < database.length; i++) {
 
         if (database[i].id == req.params.id) {
